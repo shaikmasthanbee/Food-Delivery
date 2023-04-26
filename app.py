@@ -1,7 +1,8 @@
 from flask import Flask,request,redirect,render_template,url_for,flash,session,send_file
 from flask_session import Session
 import stripe
-from flask_mysqldb import MySQL
+
+import mysql.connector
 from tokenreset import token
 from Atokenreset import token
 from otp import genotp
@@ -19,6 +20,19 @@ app.config['MYSQL_HOST']='localhost'
 app.config['MYSQL_USER']='root'
 app.config['MYSQL_PASSWORD']='admin'
 app.config['MYSQL_DB']='project'
+db=os.environ['RDS_DB_NAME']
+user=os.environ['RDS_USERNAME']
+password=os.environ['RDS_PASSWORD']
+host=os.environ['RDS_HOSTNAME']
+port=os.environ['RDS_PORT']
+mydb=mysql.connector.connect(host=host,user=user,password=password,db=db,port=port)
+with mysql.connector.connect(host=host,user=user,password=password,db=db,port=port) as conn:
+    cursor=conn.cursor()
+    cursor.execute('create table if not exists restaurant(rid int primary key,rname varchar(15),rplace varchar(20),password varchar(10),email varchar(35))')
+    cursor.execute('create table if not exists users(uname char(15) primary key,mobile bigint unique,Gender varchar(6),email varchar(35), password char(10))')
+    cursor.execute('create table if not exists additems(itemid varchar(9) primary key,itemname varchar(30),price int,category enum('South India','North India','Chinese','French') rid int,foreign key(rid) references(restaurant))')
+    cursor.execute('create table if not exists orders(orderid int primary key auto_increment,itemid varchar(9),itemname varchar(30),qty int ,total_price int ,uname char(15),foreign key(uname) references users(uname))')
+    cursor.execute('create table if not exists contactus(Name varchar(20),mobile bigint,email varchar(30),address varchar(40))')
 mysql=MySQL(app)
 Session(app)
 @app.route('/')
@@ -197,23 +211,22 @@ def Alogin():
 @app.route('/aforgetpassword',methods=['GET','POST'])
 def Aforget():#after clicking the forget password
     if request.method=='POST':
-        print(request.form)
         userid=request.form['rid']
         cursor=mysql.connection.cursor()
         cursor.execute('select rid from restaurant')# fetch the username data in the table students
         data=cursor.fetchall()#fetching all the rollno data and store it in the "data" variable 
-        if (int(userid),) in data:# if the given rollno of the user is present in tha database->data
+        if (userid,) in data:# if the given rollno of the user is present in tha database->data
             cursor.execute('select email from restaurant where rid=%s',[userid])#it fetches email related to the rollno 
             data=cursor.fetchone()[0]#fetch the only one email related to the rollno 
             #print(data)
             cursor.close()
             subject=f'Reset Password for {data}'
-            body=f'Reset the password using-{request.host+url_for("Acreatepassword",token=token(userid,360))}'
+            body=f'Reset the password using-{request.host+url_for("acreatepassword",token=token(userid,200))}'
             sendmail(data,subject,body)
             flash('Reset link sent to your mail')
             #return redirect(url_for('login'))
         else:
-            return 'Invalid userid'
+            return 'Invalid user id'
     return render_template('Aforgot.html')
 @app.route('/acreatepassword/<token>',methods=['GET','POST'])
 def Acreatepassword(token):#to create noe password and conform the password
@@ -381,7 +394,7 @@ def pay(itemid,price,name):
             mode="payment",)
         return redirect(checkout_session.url)
     else:
-        return redirect(url_for('ulogin'))
+        return redirect(url_for('login'))
 @app.route('/success/<itemid>/<itemname>/<q>/<total>')
 def success(itemid,itemname,q,total):
     if session.get('user'):
@@ -410,5 +423,7 @@ def search():
         data=cursor.fetchall()
         return render_template('itemspage.html',items=data)
             
-
-app.run(debug=True,use_reloader=True)
+         
+    
+if __name__=='__main__':
+    app.run(debug=True,use_reloader=True)
