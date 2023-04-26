@@ -1,0 +1,50 @@
+{% extends 'home2.html' %}
+{% block content %}
+    <div id="cartPage.html">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-4">
+             {% if items!='empty' %}
+             {% for i in items %}
+             
+                <div>
+                    <form method="POST" action="{{url_for('pay',itemid=i,name=items[i][0],price=items[i][2])}}">
+                    <img src="{{url_for('static',filename=i+'.jpg')}}"class="menu-item-image w-100"/>
+                    <h4 class="mt-1">{{items[i][0]}} </h4>
+                    </div>
+                    <p class="quantity mt-1">Quantity
+                        <select class="form-select" aria-label="Default select example" name="qty">
+                            <option selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                          </select>
+                        </p>
+
+                    <div class="d-flex flex-row">
+                        <h6>Price <i class="fa fa-inr" aria-hidden="true">{{items[i][2]}} </i></h6>
+                        <p class="ml-auto">15 Mins.</p>
+                    </div>
+
+                     <div class="d-flex flex-row">
+                        <button class="btn btn-success add-button" type="submit">Buy Now</button>&nbsp;&nbsp;
+                        <a class="btn btn-success add-button" href="{{url_for('rem',item=i)}}">delete</a>
+                    </form>             
+                       
+                    
+                </div>
+                {% endfor %}
+                {% endif %}
+            
+
+            </div>
+            </div> 
+        </div>
+    </div>
+{% endblock %}

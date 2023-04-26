@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN LOGIN</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+
+</head>
+<style>
+    .bgimg{
+    position: relative;
+	height: 100vh;
+	width: 100%;
+	background-image: url("https://www.shutterstock.com/image-photo/background-cooking-tagliatelle-pasta-ingredients-260nw-1724611486.jpg");
+	background-size: cover;
+	background-position: center center;
+}
+
+
+.container{
+    position: fixed;
+    top:50%;
+    left: 60%;
+    transform: translate(-50%,-50%);
+}
+
+.loginform{
+    height: 450px;
+    width: 310px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0,0,0, 1);
+    background: rgba(0,0,0,0, 1);
+    color: white;
+    padding-top: 60px;
+    margin-left:25% ;
+    border: solid transparent;
+}
+.header{
+    letter-spacing:1px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+input{
+    width: 250px;
+    margin-top: 20px;
+    background: transparent;
+    outline:none;
+    padding:8px;
+    border-radius:30px;
+    box-shadow:0 0 5px white;
+    transition:box-shadow 0.5 ease;
+ 
+ }
+ input[placeholder]:focus{
+    color:white;
+}
+ input:focus{
+    box-shadow: 0 0 10px white;
+ }
+ .btn{
+    padding:5px 20px;
+    margin-top: 20px;
+    background: transparent;
+    border-radius: 20px;
+    box-shadow: 0 0 5px white;
+    cursor:pointer;
+    font-weight: bold;
+    color:whitesmoke;
+}
+.btn:hover{
+    background-color:palevioletred;
+    color: skyblue;
+    box-shadow: 0 0 10px;
+}
+.forgot{
+    margin-top: 20px;
+    
+    
+}
+.forgot:hover{
+    text-decoration: none;
+}
+.lines{
+    margin-top:20px;
+    
+}
+.lines:hover{
+    text-decoration: none;
+}
+</style>
+<body>
+    <body>
+ 
+        
+            
+             <div class="bgimg">
+                 <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-10 col-lg-12">
+                <form method="POST">
+                <div class="loginform">
+                 <div class="header">
+                  <h1>ADMIN LOGIN</h1>
+               </div>
+               <input type="number" name ="rid" placeholder="Restaurant Id"/></br>
+               <input type="password" name="Password" placeholder="Password"/>
+               <div class="row">
+                <div class="col-12 col-md-4 col-12">
+                     
+                </div>
+            </div>
+               <div class="btn">
+                <button type="submit" style="border:none; background-color:palevioletred;">Login</button>
+            </div>
+            <div class="btn">
+                <button type="submit" style="border:none; background-color:palevioletred;">Back</button>
+            </div>
+              <div class="lines"></div>
+              <a href="{{url_for('Aforget')}}"<div class="forgot">Forgotpassword?</div>
+                
+
+
+            </div> 
+            </div>
+        </form>
+            </div>
+          </div>
+        </div>
+        </div>
+      
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+       
+</body>
+</html>

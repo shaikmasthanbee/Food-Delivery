@@ -1,0 +1,42 @@
+{% extends 'home2.html' %}
+{% block content %}
+<div class="bgcolor3 pt-4 pb-4">
+    <div class="container">
+      <div class="row">
+      {% for i in ritems %}         
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="explorecards shadow p-3 mb-3">
+            <form method="POST" action="{{url_for('pay',itemid=i[0],name=i[1],price=i[2])}}">
+
+              <img src="{{url_for('static',filename=i[0]+'.jpg')}}" height="200" width="200" class="exploreimage w-100"/>
+              <label class="cardhead4">ITEM NAME : {{i[1]}}</label><br>
+              <label class="cardhead4">ITEM price:{{i[3]}}</label>
+
+              <label class="cardhead4">ITEM category:{{i[2]}}</label><br>
+              <p class="quantity mt-1">Quantity
+                <select class="form-select" aria-label="Default select example" name="qty">
+                    <option selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </p>
+
+
+             
+          </div>
+          <a href="{{url_for('cart',itemid=i[0],name=i[1],price=i[3])}}">add to cart</a>
+          <button class="btn btn-success add-button" type="submit">Buy Now</button>
+
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+{% endblock%}

@@ -1,0 +1,19 @@
+{% extends 'home2.html' %}
+{% block content %}
+<div class="bgcolor3 pt-4 pb-4">
+    <div class="container">
+      <div class="row">
+      {% for i in orders %}         
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="explorecards shadow p-3 mb-3">
+              <img src="{{url_for('static',filename=i[1]+'.jpg')}}" height="200" width="200" class="exploreimage w-80"/>
+              <label class="cardhead4">ITEM NAME : {{i[2]}}</label>
+              <label class="cardhead4">ITEM quantity:{{i[3]}}</label>
+              <label class="cardhead4">ITEM price:{{i[4]}}</label>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+      </div>
+</div>
+ {% endblock%}

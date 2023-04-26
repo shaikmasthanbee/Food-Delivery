@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP validation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+</head>
+<style>
+    body{
+        background-image: url(https://www.india.com/wp-content/uploads/2021/04/OTP-PROBLEM.jpg);
+	    background-size: cover;
+    }
+.bgimg{
+    position: relative;
+	height: 100vh;
+	width: 100%;
+}
+h1{
+    color: black;
+}
+
+.login{
+    height: 450px;
+    width: 310px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(0,0,0, 1);
+    background: rgba(0,0,0,0, 1);
+    color: white;
+    padding-top: 60px;
+    margin-left:50% ;
+    border: solid transparent;
+    transform: translate(-80%,-50%);
+    margin-top: 20%;
+}
+
+</style>
+<body>
+    <div class="login">
+    <div class="one">
+    <center><form method="post" action="{{url_for('otp',otp=otp,name=name,mobile=mobile,Gender=Gender,email=email,password=password)}}">
+        <h1>Enter OTP</h1>
+        <input type="text" name="otp"><br>
+    <button style="border-radius: 8px; margin: 10px; background-color: rgb(149, 23, 92); color: aliceblue; ">Submit</button><br>  
+    </form></center>
+</div>
+</div>
+</body>
+</html>
